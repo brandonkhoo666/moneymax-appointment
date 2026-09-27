@@ -1,6 +1,6 @@
 import { IsBoolean, IsInt, IsNotEmpty, IsString } from 'class-validator';
 
-export class EditScheduleDayDto {
+export class EditOperationalDayDto {
   @IsInt()
   id: number;
 

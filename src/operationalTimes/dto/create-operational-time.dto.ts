@@ -1,9 +1,9 @@
 import { IsBoolean, IsInt, IsOptional, IsString } from 'class-validator';
 import { IsValidTime } from '../../validators/is-valid-time-validator.js';
 
-export class CreateScheduleTimeDto {
+export class CreateOperationalTimeDto {
   @IsInt()
-  scheduleDayId: number;
+  operationalDayId: number;
 
   @IsValidTime()
   from: string;

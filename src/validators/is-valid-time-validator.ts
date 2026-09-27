@@ -13,16 +13,16 @@ export function IsValidTime(validationOptions?: ValidationOptions) {
       options: validationOptions,
       validator: {
         validate(value: unknown) {
-          if (typeof value !== 'number' || !Number.isInteger(value)) {
+          if (typeof value !== 'string') {
             return false;
           }
 
-          if (value < 0 || value > 2359) {
+          if (!/^\d{4}$/.test(value)) {
             return false;
           }
 
-          const hours = Math.floor(value / 100);
-          const minutes = value % 100;
+          const hours = Number(value.substring(0, 2));
+          const minutes = Number(value.substring(2, 4));
 
           return hours >= 0 && hours <= 23 && minutes >= 0 && minutes <= 59;
         },

@@ -1,6 +1,6 @@
 import { IsInt } from 'class-validator';
 
-export class DeleteScheduleTimeDto {
+export class DeleteOperationalTimeDto {
   @IsInt()
   id: number;
 }

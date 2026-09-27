@@ -1,12 +1,12 @@
 import { Entity, Column, PrimaryGeneratedColumn } from 'typeorm';
 
-@Entity('schedule_times')
-export class ScheduleTime {
+@Entity('operational_times')
+export class OperationalTime {
   @PrimaryGeneratedColumn()
   id: number;
 
   @Column()
-  scheduleDayId: number;
+  operationalDayId: number;
 
   @Column({ type: 'time' })
   from: string;

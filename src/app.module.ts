@@ -2,12 +2,16 @@ import { Module } from '@nestjs/common';
 import { AppController } from './app.controller.js';
 import { AppService } from './app.service.js';
 import { TypeOrmModule } from '@nestjs/typeorm';
-import { ScheduleDay } from './scheduleDays/scheduleDay.entity.js';
-import { ScheduleDaysModule } from './scheduleDays/scheduleDays.module.js';
-import { ScheduleTimesModule } from './scheduleTimes/scheduleTimes.module.js';
-import { ScheduleTime } from './scheduleTimes/scheduleTime.entity.js';
+import { OperationalDay } from './operationalDays/operationalDay.entity.js';
+import { OperationalDaysModule } from './operationalDays/operationalDays.module.js';
+import { OperationalTimesModule } from './operationalTimes/operationalTimes.module.js';
+import { OperationalTime } from './operationalTimes/operationalTime.entity.js';
 import { UnavailableDate } from './unavailableDates/unavailableDate.entity.js';
 import { UnavailableDatesModule } from './unavailableDates/unavailableDates.module.js';
+import { Appointment } from './appointment/appointment.entity.js';
+import { AppointmentsModule } from './appointment/appointments.module.js';
+import { Booking } from './booking/booking.entity.js';
+import { BookingsModule } from './booking/bookings.module.js';
 
 @Module({
   imports: [
@@ -18,12 +22,20 @@ import { UnavailableDatesModule } from './unavailableDates/unavailableDates.modu
       username: 'root',
       password: '',
       database: 'moneymax_appointment',
-      entities: [ScheduleDay, ScheduleTime, UnavailableDate],
+      entities: [
+        OperationalDay,
+        OperationalTime,
+        UnavailableDate,
+        Appointment,
+        Booking,
+      ],
       synchronize: true,
     }),
-    ScheduleDaysModule,
-    ScheduleTimesModule,
+    OperationalDaysModule,
+    OperationalTimesModule,
     UnavailableDatesModule,
+    AppointmentsModule,
+    BookingsModule,
   ],
   controllers: [AppController],
   providers: [AppService],
