@@ -166,8 +166,8 @@ export class BookingsService {
         })
         .getMany();
 
-      // check overlapping bookings
-      const clashedOtherBookings = await manager
+      // check overlapping bookings with other appointments
+      const clashedOtherAppointmentBookings = await manager
         .getRepository(Booking)
         .createQueryBuilder('booking')
         .where('booking.date = :date', {
@@ -184,8 +184,35 @@ export class BookingsService {
         })
         .getOne();
 
-      if (clashedOtherBookings) {
+      if (clashedOtherAppointmentBookings) {
         throw new ConflictException(`The time slot is not available.`);
+      }
+
+      // check overlapping bookings within same appointments
+      const clashedSameAppointmentBooking = await manager
+        .getRepository(Booking)
+        .createQueryBuilder('booking')
+        .where('booking.date = :date', {
+          date: dto.date,
+        })
+        .andWhere('booking.appointmentId = :appointmentId', {
+          appointmentId: dto.appointmentId,
+        })
+        .andWhere('booking.startTime < :endTime', {
+          endTime,
+        })
+        .andWhere('booking.endTime > :startTime', {
+          startTime: dto.startTime,
+        })
+        .andWhere('booking.startTime != :startTime', {
+          startTime: dto.startTime,
+        })
+        .getOne();
+
+      if (clashedSameAppointmentBooking) {
+        throw new ConflictException(
+          'This appointment overlaps with an existing booking.',
+        );
       }
 
       // atomic increment booking count

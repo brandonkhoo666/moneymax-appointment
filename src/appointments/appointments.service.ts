@@ -14,6 +14,7 @@ import { OperationalDay } from '../operationalDays/operationalDay.entity.js';
 import { OperationalTime } from '../operationalTimes/operationalTime.entity.js';
 import { generateTimeSlots } from '../common/utils/time.util.js';
 import { APPOINTMENT_CONFIG } from '../configs/appointment.config.js';
+import { Booking } from '../bookings/booking.entity.js';
 
 @Injectable()
 export class AppointmentsService {
@@ -32,6 +33,9 @@ export class AppointmentsService {
 
     @InjectRepository(OperationalTime)
     private readonly operationalTimeRepository: Repository<OperationalTime>,
+
+    @InjectRepository(Booking)
+    private readonly bookingRepository: Repository<Booking>,
   ) {}
 
   async create(dto: CreateAppointmentDto) {
@@ -98,7 +102,7 @@ export class AppointmentsService {
       );
     }
 
-    // get operational time
+    // get operational times
     const operationalTimes = await this.operationalTimeRepository.find({
       where: {
         operationalDayId: operationalDay.id,
@@ -111,7 +115,7 @@ export class AppointmentsService {
 
     if (operationalTimes.length === 0) {
       throw new ConflictException(
-        `The date ${dto.date} is does not have any operational times.`,
+        `The date ${dto.date} does not have any operational times.`,
       );
     }
 
@@ -126,7 +130,7 @@ export class AppointmentsService {
       throw new NotFoundException(`Appointment ${dto.appointmentId} not found`);
     }
 
-    // get exisiting booking counts
+    // get existing booking counts
     const bookingCounts = await this.appointmentBookingCountRepository.find({
       where: {
         appointmentId: dto.appointmentId,
@@ -134,30 +138,78 @@ export class AppointmentsService {
       },
     });
 
-    // map
     const bookingCountMap = new Map(
       bookingCounts.map((item) => [item.startTime, item.bookedCount]),
     );
 
-    // generate appointment time slots
-    const appointmentTimeSlots = [];
+    // get existing bookings for this date
+    const existingBookings = await this.bookingRepository.find({
+      where: {
+        date: dto.date,
+      },
+    });
+
+    // generate valid appointment time slots
+    const appointmentTimeSlots: string[] = [];
     for (const operationalTime of operationalTimes) {
-      appointmentTimeSlots.push(
-        ...generateTimeSlots(
-          operationalTime.from,
-          operationalTime.to,
-          APPOINTMENT_CONFIG.appointmentTimeSlotInterval,
-        ),
+      const slots = generateTimeSlots(
+        operationalTime.from,
+        operationalTime.to,
+        APPOINTMENT_CONFIG.appointmentTimeSlotInterval,
       );
+
+      for (const time of slots) {
+        // calculate appointment end time
+        const [hours, minutes] = time.split(':').map(Number);
+        const startMinutes = hours * 60 + minutes;
+        const endMinutes = startMinutes + appointment.durationInMinute;
+        const endHour = Math.floor(endMinutes / 60);
+        const endMinute = endMinutes % 60;
+        const endTime =
+          `${String(endHour).padStart(2, '0')}:` +
+          `${String(endMinute).padStart(2, '0')}:00`;
+
+        // make sure the entire appointment fits inside the operational time
+        if (time >= operationalTime.from && endTime <= operationalTime.to) {
+          appointmentTimeSlots.push(time);
+        }
+      }
     }
 
     return appointmentTimeSlots.map((time) => {
       const bookedCount = bookingCountMap.get(time) ?? 0;
 
+      // calculate candidate appointment end time
+      const [hours, minutes] = time.split(':').map(Number);
+      const startMinutes = hours * 60 + minutes;
+      const endMinutes = startMinutes + appointment.durationInMinute;
+      const endHour = Math.floor(endMinutes / 60);
+      const endMinute = endMinutes % 60;
+      const endTime =
+        `${String(endHour).padStart(2, '0')}:` +
+        `${String(endMinute).padStart(2, '0')}:00`;
+
+      // check whether this slot overlaps with an existing booking
+      const hasOverlap = existingBookings.some((booking) => {
+        // same appointment + same start time is allowed. Capacity is handled by bookedCount
+        if (
+          booking.appointmentId === dto.appointmentId &&
+          booking.startTime === time
+        ) {
+          return false;
+        }
+
+        return booking.startTime < endTime && booking.endTime > time;
+      });
+
+      const availableSlots = hasOverlap
+        ? 0
+        : Math.max(appointment.maxBookingPerTimeSlot - bookedCount, 0);
+
       return {
         date: dto.date,
         time: time.substring(0, 5),
-        available_slots: appointment.maxBookingPerTimeSlot - bookedCount,
+        available_slots: availableSlots,
       };
     });
   }

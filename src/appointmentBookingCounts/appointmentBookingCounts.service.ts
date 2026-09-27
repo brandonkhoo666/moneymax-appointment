@@ -32,13 +32,11 @@ export class AppointmentBookingCountsService {
       [appointmentId, date, startTime, maxCount],
     );
 
-    // mysql2 returns an array containing the ResultSetHeader
-    const affectedRows = result.affectedRows;
-
-    if (affectedRows === 0) {
-      throw new ConflictException('Maximum booking count reached');
+    // inserted new row or existing row was incremented
+    if (result.insertId !== 0) {
+      return true;
     }
 
-    return true;
+    throw new ConflictException('Maximum booking count reached');
   }
 }
