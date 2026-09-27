@@ -17,18 +17,18 @@ export function IsValidTime(validationOptions?: ValidationOptions) {
             return false;
           }
 
-          if (!/^\d{4}$/.test(value)) {
+          // Must be HH:mm:00
+          if (!/^\d{2}:\d{2}:00$/.test(value)) {
             return false;
           }
 
-          const hours = Number(value.substring(0, 2));
-          const minutes = Number(value.substring(2, 4));
+          const [hours, minutes] = value.split(':').map(Number);
 
           return hours >= 0 && hours <= 23 && minutes >= 0 && minutes <= 59;
         },
 
         defaultMessage(args: ValidationArguments) {
-          return `${args.property} must be a valid time in HHmm format (0000-2359)`;
+          return `${args.property} must be a valid time in HH:mm:00 format`;
         },
       },
     });

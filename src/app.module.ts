@@ -8,10 +8,14 @@ import { OperationalTimesModule } from './operationalTimes/operationalTimes.modu
 import { OperationalTime } from './operationalTimes/operationalTime.entity.js';
 import { UnavailableDate } from './unavailableDates/unavailableDate.entity.js';
 import { UnavailableDatesModule } from './unavailableDates/unavailableDates.module.js';
-import { Appointment } from './appointment/appointment.entity.js';
-import { AppointmentsModule } from './appointment/appointments.module.js';
-import { Booking } from './booking/booking.entity.js';
-import { BookingsModule } from './booking/bookings.module.js';
+import { Appointment } from './appointments/appointment.entity.js';
+import { AppointmentsModule } from './appointments/appointments.module.js';
+import { Booking } from './bookings/booking.entity.js';
+import { BookingsModule } from './bookings/bookings.module.js';
+import { AppointmentBookingCount } from './appointmentBookingCounts/appointmentBookingCount.entity.js';
+import { BookingTimeSlot } from './bookingTimeSlots/bookingTimeSlot.entity.js';
+import { AppointmentBookingCountsModule } from './appointmentBookingCounts/appointmentBookingCounts.module.js';
+import { BookingTimeSlotsModule } from './bookingTimeSlots/bookingTimeSlots.module.js';
 
 @Module({
   imports: [
@@ -28,6 +32,8 @@ import { BookingsModule } from './booking/bookings.module.js';
         UnavailableDate,
         Appointment,
         Booking,
+        AppointmentBookingCount,
+        BookingTimeSlot,
       ],
       synchronize: true,
     }),
@@ -36,6 +42,8 @@ import { BookingsModule } from './booking/bookings.module.js';
     UnavailableDatesModule,
     AppointmentsModule,
     BookingsModule,
+    AppointmentBookingCountsModule,
+    BookingTimeSlotsModule,
   ],
   controllers: [AppController],
   providers: [AppService],

@@ -1,7 +1,16 @@
-import { Body, Controller, Post } from '@nestjs/common';
+import {
+  Body,
+  Controller,
+  Get,
+  Param,
+  ParseIntPipe,
+  Post,
+  Query,
+} from '@nestjs/common';
 import { AppointmentsService } from './appointments.service.js';
 import { CreateAppointmentDto } from './dto/create-appointment.dto.js';
 import { EditAppointmentDto } from './dto/edit-appointment.dto.js';
+import { ListAppointmentSlotDto } from './dto/list-appointment-slot.dto.js';
 
 @Controller('appointments')
 export class AppointmentsController {
@@ -17,8 +26,14 @@ export class AppointmentsController {
     return this.appointmentsService.edit(dto);
   }
 
-  // @Post('getAvailableTimeSlots')
-  // getAvailableTimeSlots(@Body() dto: EditAppointmentDto) {
-  //   return this.appointmentsService.edit(dto);
-  // }
+  @Get('list/:appointmentId')
+  list(
+    @Param('appointmentId', ParseIntPipe) appointmentId: number,
+    @Query() dto: ListAppointmentSlotDto,
+  ) {
+    return this.appointmentsService.list({
+      appointmentId,
+      date: dto.date,
+    });
+  }
 }

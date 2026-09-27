@@ -14,6 +14,9 @@ export class Booking {
   @Column({ type: 'time' })
   startTime: string;
 
+  @Column({ type: 'time' })
+  endTime: string;
+
   @Column()
   attendeeName: string;
 
