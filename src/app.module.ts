@@ -6,6 +6,8 @@ import { ScheduleDay } from './scheduleDays/scheduleDay.entity.js';
 import { ScheduleDaysModule } from './scheduleDays/scheduleDays.module.js';
 import { ScheduleTimesModule } from './scheduleTimes/scheduleTimes.module.js';
 import { ScheduleTime } from './scheduleTimes/scheduleTime.entity.js';
+import { UnavailableDate } from './unavailableDates/unavailableDate.entity.js';
+import { UnavailableDatesModule } from './unavailableDates/unavailableDates.module.js';
 
 @Module({
   imports: [
@@ -16,11 +18,12 @@ import { ScheduleTime } from './scheduleTimes/scheduleTime.entity.js';
       username: 'root',
       password: '',
       database: 'moneymax_appointment',
-      entities: [ScheduleDay, ScheduleTime],
+      entities: [ScheduleDay, ScheduleTime, UnavailableDate],
       synchronize: true,
     }),
     ScheduleDaysModule,
     ScheduleTimesModule,
+    UnavailableDatesModule,
   ],
   controllers: [AppController],
   providers: [AppService],
