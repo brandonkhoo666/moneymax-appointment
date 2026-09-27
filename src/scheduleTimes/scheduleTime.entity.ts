@@ -1,11 +1,4 @@
-import {
-  Entity,
-  Column,
-  PrimaryGeneratedColumn,
-  JoinColumn,
-  ManyToOne,
-} from 'typeorm';
-import { ScheduleDay } from '../scheduleDays/scheduleDay.entity.js';
+import { Entity, Column, PrimaryGeneratedColumn } from 'typeorm';
 
 @Entity('schedule_times')
 export class ScheduleTime {
@@ -15,18 +8,14 @@ export class ScheduleTime {
   @Column()
   scheduleDayId: number;
 
-  @ManyToOne(() => ScheduleDay)
-  @JoinColumn({ name: 'scheduleDayId' })
-  scheduleDay: ScheduleDay;
+  @Column({ type: 'time' })
+  from: string;
 
-  @Column()
-  from: number;
-
-  @Column()
-  to: number;
+  @Column({ type: 'time' })
+  to: string;
 
   @Column({ default: true })
-  isActive: boolean;
+  isAvailable: boolean;
 
   @Column({ type: 'varchar', nullable: true })
   remarks: string | null;

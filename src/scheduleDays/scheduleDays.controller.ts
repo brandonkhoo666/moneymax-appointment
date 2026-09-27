@@ -1,5 +1,6 @@
-import { Controller, Post } from '@nestjs/common';
+import { Body, Controller, Post } from '@nestjs/common';
 import { ScheduleDaysService } from './scheduleDays.service.js';
+import { EditScheduleDayDto } from './dto/edit-schedule-day.dto.js';
 
 @Controller('scheduleDays')
 export class ScheduleDaysController {
@@ -10,8 +11,8 @@ export class ScheduleDaysController {
     return this.scheduleDaysService.initializeScheduleDays();
   }
 
-  //   @Post('create')
-  //   create(@Body() dto: CreateScheduleDayDto) {
-  //     return this.scheduleDaysService.create(dto);
-  //   }
+  @Post('edit')
+  edit(@Body() dto: EditScheduleDayDto) {
+    return this.scheduleDaysService.edit(dto);
+  }
 }

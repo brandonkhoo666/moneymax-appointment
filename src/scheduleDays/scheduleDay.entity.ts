@@ -1,4 +1,5 @@
-import { Entity, Column, PrimaryGeneratedColumn } from 'typeorm';
+import { Entity, Column, PrimaryGeneratedColumn, OneToMany } from 'typeorm';
+import { ScheduleTime } from '../scheduleTimes/scheduleTime.entity.js';
 
 @Entity('schedule_days')
 export class ScheduleDay {
