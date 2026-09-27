@@ -1,0 +1,899 @@
+{
+  "info": {
+    "_postman_id": "bd490f7e-fb52-4d78-af9c-015a506d45de",
+    "name": "MoneyMaxAppointment",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "_exporter_id": "22951487"
+  },
+  "item": [
+    {
+      "name": "Initialize Operational Days",
+      "request": {
+        "method": "POST",
+        "header": [],
+        "url": {
+          "raw": "http://localhost:3000/operationalDays/initialize",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "3000",
+          "path": [
+            "operationalDays",
+            "initialize"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Edit Operational Day",
+      "request": {
+        "method": "POST",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n    \"id\": 1,\n    \"name\": \"Sunday\",\n    \"isActive\": false\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "http://localhost:3000/operationalDays/edit",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "3000",
+          "path": [
+            "operationalDays",
+            "edit"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Initialize Operational Times",
+      "request": {
+        "method": "POST",
+        "header": [],
+        "url": {
+          "raw": "http://localhost:3000/operationalTimes/initialize",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "3000",
+          "path": [
+            "operationalTimes",
+            "initialize"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Create Operational Time",
+      "request": {
+        "method": "POST",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n    \"operationalDayId\": 3,\n    \"from\": \"13:00:00\",\n    \"to\": \"18:00:00\",\n    \"isAvailable\": true,\n    \"remarks\": null\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "http://localhost:3000/operationalTimes/create",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "3000",
+          "path": [
+            "operationalTimes",
+            "create"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Edit Operational Time",
+      "request": {
+        "method": "POST",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n    \"id\": 1,\n    \"from\": \"09:00:00\",\n    \"to\": \"12:00:00\",\n    \"isAvailable\": true,\n    \"remarks\": null\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "http://localhost:3000/operationalTimes/edit",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "3000",
+          "path": [
+            "operationalTimes",
+            "edit"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Delete Operational Time",
+      "request": {
+        "method": "POST",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n    \"id\": 2\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "http://localhost:3000/operationalTimes/delete",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "3000",
+          "path": [
+            "operationalTimes",
+            "delete"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Create Unavailable Date",
+      "request": {
+        "method": "POST",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n    \"date\": \"2026-09-30\",\n    \"remarks\": \"public holiday\"\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "http://localhost:3000/unavailableDates/create",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "3000",
+          "path": [
+            "unavailableDates",
+            "create"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Delete Unavailable Date",
+      "request": {
+        "method": "POST",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n    \"id\": 1\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "http://localhost:3000/unavailableDates/delete",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "3000",
+          "path": [
+            "unavailableDates",
+            "delete"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Create Appointment",
+      "request": {
+        "method": "POST",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n    \"title\": \"New Meeting\",\n    \"durationInMinute\": 60,\n    \"maxBookingPerTimeSlot\": 2\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "http://localhost:3000/appointments/create",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "3000",
+          "path": [
+            "appointments",
+            "create"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Edit Appointment",
+      "request": {
+        "method": "POST",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n    \"id\": 1,\n    \"title\": \"New Meeting\",\n    \"durationInMinute\": 30,\n    \"maxBookingPerTimeSlot\": 2\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "http://localhost:3000/appointments/edit",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "3000",
+          "path": [
+            "appointments",
+            "edit"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Make Booking",
+      "request": {
+        "method": "POST",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n    \"appointmentId\": 1,\n    \"date\": \"2026-09-29\",\n    \"startTime\": \"09:00:00\",\n    \"attendeeName\": \"Brandon\",\n    \"attendeeEmail\": \"brandon0703@gmail.com\"\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "http://localhost:3000/bookings/makeBooking",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "3000",
+          "path": [
+            "bookings",
+            "makeBooking"
+          ]
+        }
+      },
+      "response": [
+        {
+          "name": "201 Success",
+          "originalRequest": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n    \"appointmentId\": 1,\n    \"date\": \"2026-09-29\",\n    \"startTime\": \"09:00:00\",\n    \"attendeeName\": \"Brandon\",\n    \"attendeeEmail\": \"brandon0703@gmail.com\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "http://localhost:3000/bookings/makeBooking",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "3000",
+              "path": [
+                "bookings",
+                "makeBooking"
+              ]
+            }
+          },
+          "status": "Created",
+          "code": 201,
+          "_postman_previewlanguage": "json",
+          "header": [
+            {
+              "key": "x-powered-by",
+              "value": "Express"
+            },
+            {
+              "key": "content-type",
+              "value": "application/json; charset=utf-8"
+            },
+            {
+              "key": "content-length",
+              "value": "155"
+            },
+            {
+              "key": "etag",
+              "value": "W/\"9b-iZqHHcrCTrKQu9C1hxMUZLLLDx0\""
+            },
+            {
+              "key": "date",
+              "value": "Sun, 27 Sep 2026 19:29:36 GMT"
+            },
+            {
+              "key": "connection",
+              "value": "keep-alive"
+            },
+            {
+              "key": "keep-alive",
+              "value": "timeout=5"
+            }
+          ],
+          "cookie": [],
+          "body": "{\n  \"id\": 5,\n  \"appointmentId\": 1,\n  \"date\": \"2026-09-29\",\n  \"startTime\": \"09:00:00\",\n  \"endTime\": \"09:30:00\",\n  \"attendeeName\": \"Brandon\",\n  \"attendeeEmail\": \"brandon0703@gmail.com\"\n}"
+        },
+        {
+          "name": "409 Reached Maximum Booking",
+          "originalRequest": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n    \"appointmentId\": 1,\n    \"date\": \"2026-09-29\",\n    \"startTime\": \"09:00:00\",\n    \"attendeeName\": \"Brandon\",\n    \"attendeeEmail\": \"brandon0703@gmail.com\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "http://localhost:3000/bookings/makeBooking",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "3000",
+              "path": [
+                "bookings",
+                "makeBooking"
+              ]
+            }
+          },
+          "status": "Conflict",
+          "code": 409,
+          "_postman_previewlanguage": "json",
+          "header": [
+            {
+              "key": "x-powered-by",
+              "value": "Express"
+            },
+            {
+              "key": "content-type",
+              "value": "application/json; charset=utf-8"
+            },
+            {
+              "key": "content-length",
+              "value": "79"
+            },
+            {
+              "key": "etag",
+              "value": "W/\"4f-l/e5uq/u/7kGNxn3rGxboQO5M4k\""
+            },
+            {
+              "key": "date",
+              "value": "Sun, 27 Sep 2026 19:30:03 GMT"
+            },
+            {
+              "key": "connection",
+              "value": "keep-alive"
+            },
+            {
+              "key": "keep-alive",
+              "value": "timeout=5"
+            }
+          ],
+          "cookie": [],
+          "body": "{\n  \"message\": \"Maximum booking count reached\",\n  \"error\": \"Conflict\",\n  \"statusCode\": 409\n}"
+        },
+        {
+          "name": "409 Holiday",
+          "originalRequest": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n    \"appointmentId\": 1,\n    \"date\": \"2026-09-30\",\n    \"startTime\": \"12:00:00\",\n    \"attendeeName\": \"Brandon\",\n    \"attendeeEmail\": \"brandon0703@gmail.com\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "http://localhost:3000/bookings/makeBooking",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "3000",
+              "path": [
+                "bookings",
+                "makeBooking"
+              ]
+            }
+          },
+          "status": "Conflict",
+          "code": 409,
+          "_postman_previewlanguage": "json",
+          "header": [
+            {
+              "key": "x-powered-by",
+              "value": "Express"
+            },
+            {
+              "key": "content-type",
+              "value": "application/json; charset=utf-8"
+            },
+            {
+              "key": "content-length",
+              "value": "110"
+            },
+            {
+              "key": "etag",
+              "value": "W/\"6e-716IX84t2G5Gzz2DPLoW/mJ+yXE\""
+            },
+            {
+              "key": "date",
+              "value": "Sun, 27 Sep 2026 19:28:34 GMT"
+            },
+            {
+              "key": "connection",
+              "value": "keep-alive"
+            },
+            {
+              "key": "keep-alive",
+              "value": "timeout=5"
+            }
+          ],
+          "cookie": [],
+          "body": "{\n  \"message\": \"The date 2026-09-30 is not operational due to public holiday\",\n  \"error\": \"Conflict\",\n  \"statusCode\": 409\n}"
+        },
+        {
+          "name": "409 Not In Operation Time",
+          "originalRequest": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n    \"appointmentId\": 1,\n    \"date\": \"2026-09-28\",\n    \"startTime\": \"12:00:00\",\n    \"attendeeName\": \"Brandon\",\n    \"attendeeEmail\": \"brandon0703@gmail.com\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "http://localhost:3000/bookings/makeBooking",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "3000",
+              "path": [
+                "bookings",
+                "makeBooking"
+              ]
+            }
+          },
+          "status": "Conflict",
+          "code": 409,
+          "_postman_previewlanguage": "json",
+          "header": [
+            {
+              "key": "x-powered-by",
+              "value": "Express"
+            },
+            {
+              "key": "content-type",
+              "value": "application/json; charset=utf-8"
+            },
+            {
+              "key": "content-length",
+              "value": "106"
+            },
+            {
+              "key": "etag",
+              "value": "W/\"6a-g9DGZYBGOBgOov2TuEGwdYYritM\""
+            },
+            {
+              "key": "date",
+              "value": "Sun, 27 Sep 2026 19:27:45 GMT"
+            },
+            {
+              "key": "connection",
+              "value": "keep-alive"
+            },
+            {
+              "key": "keep-alive",
+              "value": "timeout=5"
+            }
+          ],
+          "cookie": [],
+          "body": "{\n  \"message\": \"The time 12:00:00 - 12:30:00 is not in operational time.\",\n  \"error\": \"Conflict\",\n  \"statusCode\": 409\n}"
+        },
+        {
+          "name": "409 Not In Operational Day",
+          "originalRequest": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n    \"appointmentId\": 1,\n    \"date\": \"2026-10-03\",\n    \"startTime\": \"12:00:00\",\n    \"attendeeName\": \"Brandon\",\n    \"attendeeEmail\": \"brandon0703@gmail.com\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "http://localhost:3000/bookings/makeBooking",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "3000",
+              "path": [
+                "bookings",
+                "makeBooking"
+              ]
+            }
+          },
+          "status": "Conflict",
+          "code": 409,
+          "_postman_previewlanguage": "json",
+          "header": [
+            {
+              "key": "x-powered-by",
+              "value": "Express"
+            },
+            {
+              "key": "content-type",
+              "value": "application/json; charset=utf-8"
+            },
+            {
+              "key": "content-length",
+              "value": "96"
+            },
+            {
+              "key": "etag",
+              "value": "W/\"60-HKGYV6b0LqOEcvD4wkM/O4+5Qys\""
+            },
+            {
+              "key": "date",
+              "value": "Sun, 27 Sep 2026 19:29:10 GMT"
+            },
+            {
+              "key": "connection",
+              "value": "keep-alive"
+            },
+            {
+              "key": "keep-alive",
+              "value": "timeout=5"
+            }
+          ],
+          "cookie": [],
+          "body": "{\n  \"message\": \"The date 2026-10-03 is not in operational day.\",\n  \"error\": \"Conflict\",\n  \"statusCode\": 409\n}"
+        }
+      ]
+    },
+    {
+      "name": "List Appointment Slots",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "http://localhost:3000/appointments/list/2?date=2026-09-28",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "3000",
+          "path": [
+            "appointments",
+            "list",
+            "2"
+          ],
+          "query": [
+            {
+              "key": "date",
+              "value": "2026-09-28"
+            }
+          ]
+        }
+      },
+      "response": [
+        {
+          "name": "200 Success",
+          "originalRequest": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:3000/appointments/list/1?date=2026-09-28",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "3000",
+              "path": [
+                "appointments",
+                "list",
+                "1"
+              ],
+              "query": [
+                {
+                  "key": "date",
+                  "value": "2026-09-28"
+                }
+              ]
+            }
+          },
+          "status": "OK",
+          "code": 200,
+          "_postman_previewlanguage": "json",
+          "header": [
+            {
+              "key": "x-powered-by",
+              "value": "Express"
+            },
+            {
+              "key": "content-type",
+              "value": "application/json; charset=utf-8"
+            },
+            {
+              "key": "content-length",
+              "value": "913"
+            },
+            {
+              "key": "etag",
+              "value": "W/\"391-3LxMa8siNd3+X36ihK+k6cDDEn0\""
+            },
+            {
+              "key": "date",
+              "value": "Sun, 27 Sep 2026 19:31:04 GMT"
+            },
+            {
+              "key": "connection",
+              "value": "keep-alive"
+            },
+            {
+              "key": "keep-alive",
+              "value": "timeout=5"
+            }
+          ],
+          "cookie": [],
+          "body": "[\n  {\n    \"date\": \"2026-09-28\",\n    \"time\": \"09:00\",\n    \"available_slots\": 0\n  },\n  {\n    \"date\": \"2026-09-28\",\n    \"time\": \"09:30\",\n    \"available_slots\": 0\n  },\n  {\n    \"date\": \"2026-09-28\",\n    \"time\": \"10:00\",\n    \"available_slots\": 1\n  },\n  {\n    \"date\": \"2026-09-28\",\n    \"time\": \"10:30\",\n    \"available_slots\": 0\n  },\n  {\n    \"date\": \"2026-09-28\",\n    \"time\": \"11:00\",\n    \"available_slots\": 1\n  },\n  {\n    \"date\": \"2026-09-28\",\n    \"time\": \"11:30\",\n    \"available_slots\": 2\n  },\n  {\n    \"date\": \"2026-09-28\",\n    \"time\": \"13:00\",\n    \"available_slots\": 2\n  },\n  {\n    \"date\": \"2026-09-28\",\n    \"time\": \"13:30\",\n    \"available_slots\": 2\n  },\n  {\n    \"date\": \"2026-09-28\",\n    \"time\": \"14:00\",\n    \"available_slots\": 2\n  },\n  {\n    \"date\": \"2026-09-28\",\n    \"time\": \"14:30\",\n    \"available_slots\": 2\n  },\n  {\n    \"date\": \"2026-09-28\",\n    \"time\": \"15:00\",\n    \"available_slots\": 2\n  },\n  {\n    \"date\": \"2026-09-28\",\n    \"time\": \"15:30\",\n    \"available_slots\": 2\n  },\n  {\n    \"date\": \"2026-09-28\",\n    \"time\": \"16:00\",\n    \"available_slots\": 2\n  },\n  {\n    \"date\": \"2026-09-28\",\n    \"time\": \"16:30\",\n    \"available_slots\": 2\n  },\n  {\n    \"date\": \"2026-09-28\",\n    \"time\": \"17:00\",\n    \"available_slots\": 2\n  },\n  {\n    \"date\": \"2026-09-28\",\n    \"time\": \"17:30\",\n    \"available_slots\": 2\n  }\n]"
+        },
+        {
+          "name": "400 Invalid Input Date",
+          "originalRequest": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:3000/appointments/list/1?date=2026-09-100",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "3000",
+              "path": [
+                "appointments",
+                "list",
+                "1"
+              ],
+              "query": [
+                {
+                  "key": "date",
+                  "value": "2026-09-100"
+                }
+              ]
+            }
+          },
+          "status": "Bad Request",
+          "code": 400,
+          "_postman_previewlanguage": "json",
+          "header": [
+            {
+              "key": "x-powered-by",
+              "value": "Express"
+            },
+            {
+              "key": "content-type",
+              "value": "application/json; charset=utf-8"
+            },
+            {
+              "key": "content-length",
+              "value": "88"
+            },
+            {
+              "key": "etag",
+              "value": "W/\"58-t8RQ7PqYVkhHaK1WQ6IEjYO2Wns\""
+            },
+            {
+              "key": "date",
+              "value": "Sun, 27 Sep 2026 19:32:06 GMT"
+            },
+            {
+              "key": "connection",
+              "value": "keep-alive"
+            },
+            {
+              "key": "keep-alive",
+              "value": "timeout=5"
+            }
+          ],
+          "cookie": [],
+          "body": "{\n  \"message\": [\n    \"date must be in YYYY-MM-DD format\"\n  ],\n  \"error\": \"Bad Request\",\n  \"statusCode\": 400\n}"
+        },
+        {
+          "name": "409 Holiday",
+          "originalRequest": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:3000/appointments/list/1?date=2026-09-30",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "3000",
+              "path": [
+                "appointments",
+                "list",
+                "1"
+              ],
+              "query": [
+                {
+                  "key": "date",
+                  "value": "2026-09-30"
+                }
+              ]
+            }
+          },
+          "status": "Conflict",
+          "code": 409,
+          "_postman_previewlanguage": "json",
+          "header": [
+            {
+              "key": "x-powered-by",
+              "value": "Express"
+            },
+            {
+              "key": "content-type",
+              "value": "application/json; charset=utf-8"
+            },
+            {
+              "key": "content-length",
+              "value": "110"
+            },
+            {
+              "key": "etag",
+              "value": "W/\"6e-716IX84t2G5Gzz2DPLoW/mJ+yXE\""
+            },
+            {
+              "key": "date",
+              "value": "Sun, 27 Sep 2026 19:31:20 GMT"
+            },
+            {
+              "key": "connection",
+              "value": "keep-alive"
+            },
+            {
+              "key": "keep-alive",
+              "value": "timeout=5"
+            }
+          ],
+          "cookie": [],
+          "body": "{\n  \"message\": \"The date 2026-09-30 is not operational due to public holiday\",\n  \"error\": \"Conflict\",\n  \"statusCode\": 409\n}"
+        },
+        {
+          "name": "404 Appointment Not Found",
+          "originalRequest": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:3000/appointments/list/2?date=2026-09-28",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "3000",
+              "path": [
+                "appointments",
+                "list",
+                "2"
+              ],
+              "query": [
+                {
+                  "key": "date",
+                  "value": "2026-09-28"
+                }
+              ]
+            }
+          },
+          "status": "Not Found",
+          "code": 404,
+          "_postman_previewlanguage": "json",
+          "header": [
+            {
+              "key": "x-powered-by",
+              "value": "Express"
+            },
+            {
+              "key": "content-type",
+              "value": "application/json; charset=utf-8"
+            },
+            {
+              "key": "content-length",
+              "value": "74"
+            },
+            {
+              "key": "etag",
+              "value": "W/\"4a-bF71pBGhlhNXKwMrChoyVA/3zK4\""
+            },
+            {
+              "key": "date",
+              "value": "Sun, 27 Sep 2026 19:32:39 GMT"
+            },
+            {
+              "key": "connection",
+              "value": "keep-alive"
+            },
+            {
+              "key": "keep-alive",
+              "value": "timeout=5"
+            }
+          ],
+          "cookie": [],
+          "body": "{\n  \"message\": \"Appointment 2 not found\",\n  \"error\": \"Not Found\",\n  \"statusCode\": 404\n}"
+        }
+      ]
+    }
+  ]
+}
