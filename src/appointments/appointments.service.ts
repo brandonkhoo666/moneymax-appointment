@@ -15,6 +15,7 @@ import { OperationalTime } from '../operationalTimes/operationalTime.entity.js';
 import { generateTimeSlots } from '../common/utils/time.util.js';
 import { APPOINTMENT_CONFIG } from '../configs/appointment.config.js';
 import { Booking } from '../bookings/booking.entity.js';
+import { BookingTimeSlot } from '../bookingTimeSlots/bookingTimeSlot.entity.js';
 
 @Injectable()
 export class AppointmentsService {
@@ -36,6 +37,9 @@ export class AppointmentsService {
 
     @InjectRepository(Booking)
     private readonly bookingRepository: Repository<Booking>,
+
+    @InjectRepository(BookingTimeSlot)
+    private readonly bookingTimeSlotRepository: Repository<BookingTimeSlot>,
   ) {}
 
   async create(dto: CreateAppointmentDto) {
@@ -65,6 +69,19 @@ export class AppointmentsService {
   }
 
   async list(dto: { appointmentId: number; date: string }) {
+    // check date within booking period
+    const bookingTimeSlot = await this.bookingTimeSlotRepository.findOne({
+      where: {
+        date: dto.date,
+      },
+    });
+
+    if (!bookingTimeSlot) {
+      throw new ConflictException(
+        `The date ${dto.date} is not in our booking period.`,
+      );
+    }
+
     // check unavailable date
     const unavailableDate = await this.unavailableDateRepository.findOne({
       where: {

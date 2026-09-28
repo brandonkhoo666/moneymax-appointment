@@ -62,6 +62,19 @@ export class BookingsService {
       throw new NotFoundException(`Appointment ${dto.appointmentId} not found`);
     }
 
+    // check date within booking period
+    const bookingTimeSlot = await this.bookingTimeSlotRepository.findOne({
+      where: {
+        date: dto.date,
+      },
+    });
+
+    if (!bookingTimeSlot) {
+      throw new ConflictException(
+        `The date ${dto.date} is not in our booking period.`,
+      );
+    }
+
     // check unavailable date
     const unavailableDate = await this.unavailableDateRepository.findOne({
       where: {

@@ -8,6 +8,7 @@ import { UnavailableDate } from '../unavailableDates/unavailableDate.entity.js';
 import { OperationalDay } from '../operationalDays/operationalDay.entity.js';
 import { OperationalTime } from '../operationalTimes/operationalTime.entity.js';
 import { Booking } from '../bookings/booking.entity.js';
+import { BookingTimeSlot } from '../bookingTimeSlots/bookingTimeSlot.entity.js';
 
 @Module({
   imports: [
@@ -18,6 +19,7 @@ import { Booking } from '../bookings/booking.entity.js';
       OperationalTime,
       AppointmentBookingCount,
       Booking,
+      BookingTimeSlot,
     ]),
   ],
   controllers: [AppointmentsController],
