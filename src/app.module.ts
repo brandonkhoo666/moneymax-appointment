@@ -16,6 +16,8 @@ import { AppointmentBookingCount } from './appointmentBookingCounts/appointmentB
 import { BookingTimeSlot } from './bookingTimeSlots/bookingTimeSlot.entity.js';
 import { AppointmentBookingCountsModule } from './appointmentBookingCounts/appointmentBookingCounts.module.js';
 import { BookingTimeSlotsModule } from './bookingTimeSlots/bookingTimeSlots.module.js';
+import { ScheduleModule } from '@nestjs/schedule';
+import { CronModule } from './cron/cron.module.js';
 
 @Module({
   imports: [
@@ -37,6 +39,7 @@ import { BookingTimeSlotsModule } from './bookingTimeSlots/bookingTimeSlots.modu
       ],
       synchronize: true,
     }),
+    ScheduleModule.forRoot(),
     OperationalDaysModule,
     OperationalTimesModule,
     UnavailableDatesModule,
@@ -44,6 +47,7 @@ import { BookingTimeSlotsModule } from './bookingTimeSlots/bookingTimeSlots.modu
     BookingsModule,
     AppointmentBookingCountsModule,
     BookingTimeSlotsModule,
+    CronModule,
   ],
   controllers: [AppController],
   providers: [AppService],

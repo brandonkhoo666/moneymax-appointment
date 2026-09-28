@@ -26,3 +26,19 @@ export function generateTimeSlots(
 
   return slots;
 }
+
+export function generateDailyLockSlots(): string[] {
+  const slots: string[] = [];
+
+  for (let minutes = 0; minutes < 24 * 60; minutes += 5) {
+    const hour = Math.floor(minutes / 60);
+    const minute = minutes % 60;
+
+    slots.push(
+      `${String(hour).padStart(2, '0')}:` +
+        `${String(minute).padStart(2, '0')}:00`,
+    );
+  }
+
+  return slots;
+}

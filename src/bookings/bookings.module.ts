@@ -8,6 +8,7 @@ import { UnavailableDate } from '../unavailableDates/unavailableDate.entity.js';
 import { OperationalDay } from '../operationalDays/operationalDay.entity.js';
 import { OperationalTime } from '../operationalTimes/operationalTime.entity.js';
 import { AppointmentBookingCountsModule } from '../appointmentBookingCounts/appointmentBookingCounts.module.js';
+import { BookingTimeSlot } from '../bookingTimeSlots/bookingTimeSlot.entity.js';
 
 @Module({
   imports: [
@@ -17,6 +18,7 @@ import { AppointmentBookingCountsModule } from '../appointmentBookingCounts/appo
       UnavailableDate,
       OperationalDay,
       OperationalTime,
+      BookingTimeSlot,
     ]),
     AppointmentBookingCountsModule,
   ],

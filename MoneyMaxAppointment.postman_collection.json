@@ -227,7 +227,7 @@
         "header": [],
         "body": {
           "mode": "raw",
-          "raw": "{\n    \"title\": \"New Meeting\",\n    \"durationInMinute\": 60,\n    \"maxBookingPerTimeSlot\": 2\n}",
+          "raw": "{\n    \"title\": \"New Meeting\",\n    \"durationInMinute\": 60,\n    \"maxBookingPerTimeSlot\": 5\n}",
           "options": {
             "raw": {
               "language": "json"
@@ -285,7 +285,7 @@
         "header": [],
         "body": {
           "mode": "raw",
-          "raw": "{\n    \"appointmentId\": 1,\n    \"date\": \"2026-09-29\",\n    \"startTime\": \"09:00:00\",\n    \"attendeeName\": \"Brandon\",\n    \"attendeeEmail\": \"brandon0703@gmail.com\"\n}",
+          "raw": "{\n    \"appointmentId\": 1,\n    \"date\": \"2026-10-01\",\n    \"startTime\": \"10:00:00\",\n    \"attendeeName\": \"Brandon\",\n    \"attendeeEmail\": \"brandon0703@gmail.com\"\n}",
           "options": {
             "raw": {
               "language": "json"
@@ -894,6 +894,27 @@
           "body": "{\n  \"message\": \"Appointment 2 not found\",\n  \"error\": \"Not Found\",\n  \"statusCode\": 404\n}"
         }
       ]
+    },
+    {
+      "name": "Initialize 30 Days Booking Time Slots",
+      "request": {
+        "method": "POST",
+        "header": [],
+        "url": {
+          "raw": "http://localhost:3000/cron/booking-time-slots/initialize",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "3000",
+          "path": [
+            "cron",
+            "booking-time-slots",
+            "initialize"
+          ]
+        }
+      },
+      "response": []
     }
   ]
 }

@@ -38,6 +38,9 @@ export class BookingsService {
 
     @InjectRepository(OperationalTime)
     private readonly operationalTimeRepository: Repository<OperationalTime>,
+
+    @InjectRepository(BookingTimeSlot)
+    private readonly bookingTimeSlotRepository: Repository<BookingTimeSlot>,
   ) {}
 
   async makeBooking(dto: MakeBookingDto) {
@@ -128,31 +131,16 @@ export class BookingsService {
       );
     }
 
+    // generate time slots
+    const slots = generateTimeSlots(
+      dto.startTime,
+      endTime,
+      APPOINTMENT_CONFIG.minSlotDuration,
+      false,
+    );
+
     // start transaction
     return this.dataSource.transaction(async (manager) => {
-      // generate time slots
-      const slots = generateTimeSlots(
-        dto.startTime,
-        endTime,
-        APPOINTMENT_CONFIG.minSlotDuration,
-        false,
-      );
-
-      // create missing lock rows
-      await manager
-        .getRepository(BookingTimeSlot)
-        .createQueryBuilder()
-        .insert()
-        .into(BookingTimeSlot)
-        .values(
-          slots.map((slot) => ({
-            date: dto.date,
-            startTime: slot,
-          })),
-        )
-        .orIgnore()
-        .execute();
-
       // lock all required slots
       await manager
         .getRepository(BookingTimeSlot)
